@@ -15,6 +15,7 @@ public class GameSceneFlow : MonoBehaviour
     private void Start()
     {
         Ready();
+        GameManager.Data.CurScore = 0;
     }
 
     // 이벤트는 아무것도 안붙어있을 때 조심해야하기 때문에 ? 사용

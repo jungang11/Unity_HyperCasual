@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private float moveSpeed;
 
+    public UnityEvent OnJumped;
     public UnityEvent OnDied;
+    public UnityEvent OnScored;
 
     private Rigidbody2D rb;
     
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rb.velocity = Vector2.up * jumpPower;
+
+        OnJumped?.Invoke();
     }
 
     private void Rotate()
@@ -42,5 +46,11 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         OnDied?.Invoke();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        GameManager.Data.CurScore++;
+        OnScored?.Invoke();
     }
 }
